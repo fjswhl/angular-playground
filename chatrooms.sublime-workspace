@@ -1,0 +1,769 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"userinro",
+				"usersInRoomSummary"
+			],
+			[
+				"user",
+				"usersInRoomSummary"
+			],
+			[
+				"sock",
+				"socket"
+			],
+			[
+				"soc",
+				"socket"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"export",
+				"exports  (variable)"
+			],
+			[
+				"lis",
+				"listen"
+			],
+			[
+				"cha",
+				"chatServer"
+			],
+			[
+				"he",
+				"head	Tag"
+			],
+			[
+				"file",
+				"filePath"
+			],
+			[
+				"fortune",
+				"getFortune"
+			],
+			[
+				"us",
+				"use"
+			],
+			[
+				"re",
+				"re	require"
+			],
+			[
+				"ex",
+				"express"
+			],
+			[
+				"req",
+				"require"
+			],
+			[
+				"head",
+				"header	Tag"
+			],
+			[
+				"createser",
+				"http.createServer(requestListener);"
+			],
+			[
+				"pro",
+				"process_request"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "var http = require('http');\nvar fs = require('fs');\nvar path = require('path');\nvar mime = require('mime');\nvar cache = {};\n\nfunction send404 (res) {\n	res.writeHead(404, {'Content-Type': 'text/plain'});\n	res.write('Error 404: resource not found');\n	res.end();\n}\n\nfunction sendFile (res, filePath, fileContents) {\n	res.writeHead(\n		200,\n		{'Content-Type': mime.lookup(path.basename(filePath))}\n	);\n	res.end(fileContents);\n}\n\nfunction serveStatic (res, cache, absPath) {\n	if (cache[absPath]) {\n		sendFile(res, absPath, cache[absPath]);	\n	}else{\n		fs.exists(absPath, function(exists){\n			if (exists) {\n				fs.readFile(absPath, function(err, data) {\n					if (err) {\n						send404(res);	\n					} else{\n						cache[absPath] = data;\n						sendFile(res, absPath, data);\n					}\n				});\n			}else{\n				send404(res);\n			}\n		});\n	}\n}\n\n\nvar server = http.createServer(function(req, res) {\n	var filePath = false;\n	if(req.url == '/'){\n		filePath = 'public/index.html';\n	}else{\n		filePath = 'public' + req.url;\n	}\n	var absPath = './' + filePath;\n	serveStatic(res, cache, absPath);\n});\nserver.listen(3000, function() {\n	console.log(\"server listening on port 3000.\");\n});\n\nvar chatServer = require('./lib/chat_server');\nchatServer.listen(server);\n\n\n\n\n\n\n\n\n",
+			"file": "server.js",
+			"file_size": 1161,
+			"file_write_time": 130603715830000000,
+			"settings":
+			{
+				"buffer_size": 1235,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/chat_server.js",
+			"settings":
+			{
+				"buffer_size": 1632,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/stylesheets/style.css",
+			"settings":
+			{
+				"buffer_size": 371,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/User/node.sublime-build",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"packageremo",
+				"Package Control: Remove Package"
+			],
+			[
+				"packageins",
+				"Package Control: Install Package"
+			],
+			[
+				"packagein",
+				"Package Control: Install Package"
+			],
+			[
+				"package ins",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"sublime",
+				"SublimeCodeIntel: Disable Live Autocompletion"
+			],
+			[
+				"sublim",
+				"SublimeCodeIntel: Disable Plugin"
+			],
+			[
+				"package remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"node",
+				"Nodejs::Default File Settings"
+			],
+			[
+				"inslta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 602.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"nodejs",
+			"node",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/lin/Documents/Code/Node/chatrooms",
+		"/Users/lin/Documents/Code/Node/chatrooms/lib",
+		"/Users/lin/Documents/Code/Node/chatrooms/node_modules",
+		"/Users/lin/Documents/Code/Node/chatrooms/public"
+	],
+	"file_history":
+	[
+		"/Users/lin/Documents/Code/Node/chatrooms/public/index.html",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/User/SublimeCodeIntel.sublime-settings",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/JSHint Gutter/.jshintrc",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/Users/lin/Documents/Code/Node/chatrooms/node_modules/mime/mime.js",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/User/HTML.sublime-settings",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/libs/codeintel2/lib_srcs/node.js/0.8/path.js",
+		"/Users/lin/Documents/Code/Node/Meadowlark/views/tours/hood-river.handlebars",
+		"/Users/lin/Documents/Code/Node/Meadowlark/meadowlark.js",
+		"/Users/lin/Documents/Code/Node/Meadowlark/test.js",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/User/JavaScript.sublime-settings",
+		"/Users/lin/Documents/Code/Node/Meadowlark/views/about.handlebars",
+		"/Users/lin/Documents/Code/Node/Meadowlark/views/layouts/main.handlebars",
+		"/Users/lin/Documents/Code/Node/Meadowlark/views/home.handlebars",
+		"/Users/lin/Documents/Code/Node/Meadowlark/views/404.handlebars",
+		"/Users/lin/Documents/Code/Node/Meadowlark/public/qa/tests-global.js",
+		"/Users/lin/Documents/Code/Node/Meadowlark/public/qa/tests-about.js",
+		"/Users/lin/Documents/Code/Node/Meadowlark/views/500.handlebars",
+		"/Users/lin/Documents/Code/Node/hello.js",
+		"/Users/lin/Documents/Code/Node/ch4/simple_server.js",
+		"/Users/lin/Documents/Code/Test/block.m",
+		"/Users/lin/Documents/Code/Node/untitled.sublime-project",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/Nodejs/Nodejs.sublime-settings",
+		"/Users/lin/Library/Application Support/Sublime Text 3/Packages/User/node.sublime-build",
+		"/Users/lin/Documents/Code/Node/untitled folder/test.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/Users/lin/Documents/Code/Node/chatrooms"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "server.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1235,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								259,
+								259
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": true,
+									"javascriptExtraPaths":
+									[
+										"/Users/lin/Documents/Code/Node/Meadowlark/node_modules"
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails",
+								"Node.js"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"JavaScript": "Node.js"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lib/chat_server.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1632,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1616,
+								1616
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": true,
+									"javascriptExtraPaths":
+									[
+										"/Users/lin/Documents/Code/Node/Meadowlark/node_modules"
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails",
+								"Node.js"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"JavaScript": "Node.js"
+							},
+							"codeintel_tooltips": "popup",
+							"open_with_edit": true,
+							"sublime_auto_complete": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/stylesheets/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 371,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								235,
+								235
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": true,
+									"javascriptExtraPaths":
+									[
+										"/Users/lin/Documents/Code/Node/Meadowlark/node_modules"
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails",
+								"Node.js"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"JavaScript": "Node.js"
+							},
+							"codeintel_tooltips": "popup",
+							"open_with_edit": true,
+							"sublime_auto_complete": true,
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 53.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"he",
+				"hello.js"
+			],
+			[
+				"unti",
+				"untitled.sublime-project"
+			],
+			[
+				"hello",
+				"hello.js"
+			],
+			[
+				"node",
+				"~/Documents/Code/Node/hello.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 117.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
