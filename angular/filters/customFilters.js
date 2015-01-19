@@ -45,7 +45,7 @@ app.filter("unique", function () {
                 }
                 return result;
             } else {
-                return data ;
+                return data;
             }
         };
     });
