@@ -31,7 +31,7 @@ app.constant("productListActiveClass", "btn-primary")
         
     $scope.getPageClass = function (page) {
         return $scope.selectedPage == page ? productListActiveClass : "";
-    }
+    };
 
     $scope.addProductToCart = function (product) {
         cart.addProduct(product.id, product.name, product.price);

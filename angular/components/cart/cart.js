@@ -22,6 +22,7 @@ app.factory("cart", function () {
                     count: 1, id: id, price: price, name:name
                 });
             }
+
         },
         
         removeProduct: function (id) {
